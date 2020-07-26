@@ -72,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
   static String googleSearchFont = 'Arial';
 
   bool emptySearchBox = true;
-  bool searchFocused = false;
+  // bool searchFocused = false; // Used for a focused search bar
 
   static String firestoreURL =
       "https://firebasestorage.googleapis.com/v0/b/searchcv-23163.appspot.com/o/";
@@ -132,7 +132,7 @@ class _MyHomePageState extends State<MyHomePage> {
       emptySearchBox = true;
       searchInputController.clear();
       FocusScope.of(context).unfocus();
-      searchFocused = false;
+      // searchFocused = false; // Used for a focused search bar
 
       return;
     }
@@ -157,13 +157,13 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
     emptySearchBox = true;
-    searchFocused = false;
+    // searchFocused = false; // Used for a focused search bar
     super.initState();
   }
 
   void focusSearch() {
     setState(() {
-      searchFocused = true;
+      // searchFocused = true;  // Used for a focused search bar
     });
   }
 
@@ -195,86 +195,70 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 Container(
+                  width: 690,
+                  height: searchBarHeight,
+                  // foregroundDecoration: BoxDecoration(
+                  // color: Colors.white,
+                  // ),
+                  // Search Bar Searchbar
                   decoration: BoxDecoration(
-                    boxShadow: (searchFocused)
-                        ? [
-                            BoxShadow(
-                              color: Color.fromRGBO(32, 33, 36, 0.28),
-                              // spreadRadius: 5,
-                              // blurRadius: 7,
-                              offset:
-                                  Offset(0, 3), // changes position of shadow
-                            ),
-                          ]
-                        : [],
-                  ),
-                  child: Container(
-                    width: 690,
-                    height: searchBarHeight,
-                    // foregroundDecoration: BoxDecoration(
-                    // color: Colors.white,
-                    // ),
-                    // Search Bar Searchbar
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(searchBarHeight / 2),
-                      border: Border.all(
-                        color: Hexcolor(googleSearchBorderColor),
-                        width: 1,
-                      ),
-                      color: Hexcolor(googleWhite),
+                    borderRadius: BorderRadius.circular(searchBarHeight / 2),
+                    border: Border.all(
+                      color: Hexcolor(googleSearchBorderColor),
+                      width: 1,
                     ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          child: magIcon,
-                          padding: EdgeInsets.fromLTRB(14, 0, 14, 0),
-                          // color: Colors.red,
-                        ),
-                        Container(
-                          width: searchbarWidth,
-                          child: TextField(
-                            onTap: () {
-                              focusSearch();
-                              // print(FocusScope.of(context).isFirstFocus);
-                            },
-                            controller: searchInputController,
-                            cursorColor: Colors.black,
-                            cursorWidth: 1,
-                            enableSuggestions: false,
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.black,
-                              fontFamily: googleSearchFont,
-                            ),
-                            onChanged: (text) {
-                              createGoogleLetters(text);
-                              // Search for tags or projects
-                            },
-                            decoration: InputDecoration(
-                              focusedBorder: InputBorder.none,
-                              enabledBorder: InputBorder.none,
-                              errorBorder: InputBorder.none,
-                              disabledBorder: InputBorder.none,
-                            ),
+                    color: Hexcolor(googleWhite),
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        child: magIcon,
+                        padding: EdgeInsets.fromLTRB(14, 0, 14, 0),
+                        // color: Colors.red,
+                      ),
+                      Container(
+                        width: searchbarWidth,
+                        child: TextField(
+                          onTap: () {
+                            focusSearch();
+                            // print(FocusScope.of(context).isFirstFocus);
+                          },
+                          controller: searchInputController,
+                          cursorColor: Colors.black,
+                          cursorWidth: 1,
+                          enableSuggestions: false,
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.black,
+                            fontFamily: googleSearchFont,
+                          ),
+                          onChanged: (text) {
+                            createGoogleLetters(text);
+                            // Search for tags or projects
+                          },
+                          decoration: InputDecoration(
+                            focusedBorder: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            errorBorder: InputBorder.none,
+                            disabledBorder: InputBorder.none,
                           ),
                         ),
-                        Container(
-                          child: (emptySearchBox) // cancelIcon
-                              ? Container()
-                              : GestureDetector(
-                                  onTap: () {
-                                    createGoogleLetters("");
-                                    // Empty for now
-                                  },
-                                  child: Container(
-                                      child: cancelIcon,
-                                      padding:
-                                          EdgeInsets.fromLTRB(14, 0, 0, 0)),
-                                ),
-                        ),
-                      ],
-                    ),
+                      ),
+                      Container(
+                        child: (emptySearchBox) // cancelIcon
+                            ? Container()
+                            : GestureDetector(
+                                onTap: () {
+                                  createGoogleLetters("");
+                                  // Empty for now
+                                },
+                                child: Container(
+                                    child: cancelIcon,
+                                    padding: EdgeInsets.fromLTRB(14, 0, 0, 0)),
+                              ),
+                      ),
+                    ],
                   ),
                 ),
               ],
