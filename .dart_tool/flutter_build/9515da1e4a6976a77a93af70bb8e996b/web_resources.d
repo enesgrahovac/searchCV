@@ -1,0 +1,1 @@
+ build/web/index.html build/web/favicon.png build/web/icons/Icon-192.png build/web/icons/Icon-512.png build/web/manifest.json:  /Users/enes/Documents/SearchCV/web/index.html /Users/enes/Documents/SearchCV/web/favicon.png /Users/enes/Documents/SearchCV/web/icons/Icon-192.png /Users/enes/Documents/SearchCV/web/icons/Icon-512.png /Users/enes/Documents/SearchCV/web/manifest.json
