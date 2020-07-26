@@ -75,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
   // bool searchFocused = false; // Used for a focused search bar
 
   static String firestoreURL =
-      "https://firebasestorage.googleapis.com/v0/b/searchcv-23163.appspot.com/o/";
+      "https://firebasestorage.googleapis.com/v0/b/searchme-1.appspot.com/o/";
 
   static Widget magIcon = Image.network(
     firestoreURL + "mag_icon.png?alt=media",
