@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'global_vars.dart' as globals;
+import 'dart:html' as html;
 
 class SearchControlBar extends StatefulWidget {
   SearchControlBar({
@@ -29,34 +30,53 @@ class _SearchControlBarState extends State<SearchControlBar> {
   List<Widget> allIcons = [];
 
   _createIcon(iconName, selected) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          allIcons = _buildBar(iconName);
-        });
+    bool isHovered = false;
+    Color textColor = (selected)
+        ? Color.fromRGBO(26, 115, 232, 1)
+        : Color.fromRGBO(95, 99, 104, 1);
+    return MouseRegion(
+      onHover: (event) {
+        // setState(() {
+          // print(event);
+          textColor = Color.fromRGBO(26, 115, 232, 1);
+        // }); 
       },
-      child: Container(
-        decoration: (selected)?BoxDecoration(
-          border: Border(
-            bottom: BorderSide(
-              color: Hexcolor("#1a73e8"),
-              width: 3,
-            ),
+      child: GestureDetector(
+        onTap: () {
+          setState(() {
+            allIcons = _buildBar(iconName);
+          });
+        },
+        child: Container(
+          decoration: (selected)
+              ? BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                      color: Hexcolor("#1a73e8"),
+                      width: 3,
+                    ),
+                  ),
+                  color: Hexcolor(googleWhite),
+                )
+              : null,
+          // color:"#1a73e8",
+          padding: EdgeInsets.fromLTRB(10, 16, 12, 16),
+          child: Row(
+            children: [
+              Container(
+                padding: EdgeInsets.fromLTRB(0, 0, 5, 0),
+                child: (selected)
+                    ? cacheImages[iconName]
+                    : cacheImages["unselected_" + iconName],
+              ),
+              Text(
+                iconName,
+                style: TextStyle(
+                  color: textColor,
+                ),
+              ),
+            ],
           ),
-          color: Hexcolor(googleWhite),
-        ):null,
-        // color:"#1a73e8",
-        padding: EdgeInsets.fromLTRB(10, 16, 12, 16),
-        child: Row(
-          children: [
-            Container(
-              padding: EdgeInsets.fromLTRB(0, 0, 5, 0),
-              child: (selected)
-                  ? cacheImages[iconName]
-                  : cacheImages["unselected_" + iconName],
-            ),
-            Text(iconName),
-          ],
         ),
       ),
     );
@@ -86,8 +106,8 @@ class _SearchControlBarState extends State<SearchControlBar> {
           )),
       Expanded(
         child: Container(
-          // color: Colors.yellow,
-        ),
+            // color: Colors.yellow,
+            ),
       ),
     ];
   }
