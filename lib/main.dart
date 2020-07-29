@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'search_controls_bar.dart';
 import 'global_vars.dart';
+import 'search_results_bar.dart';
 void main() {
   runApp(MyApp());
 }
@@ -163,7 +164,7 @@ class _MyHomePageState extends State<MyHomePage> {
         50; // It is actually 46 pixels on google search apge
     double searchBarPadding = 20;
     
-    double resultBar = 43;
+    
 
     Container searchBar = Container(
       height: searchBarHeight +
@@ -253,24 +254,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
     Widget searchControlBar = SearchControlBar();
 
+    Widget searchResultsBar = SearchResultsBar();
+
     return Scaffold(
       body: Column(
         children: <Widget>[
           searchBar,
           searchControlBar,
-          Container(
-            height: resultBar,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: Container(
-                    color: Colors.green,
-                  ),
-                ),
-              ],
-            ),
-          ),
+          searchResultsBar,
           Container(
             height: height -
                 topicToolbar -
@@ -308,5 +299,6 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
 
 

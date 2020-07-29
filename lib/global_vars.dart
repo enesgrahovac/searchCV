@@ -4,6 +4,9 @@ String firestoreURL =
 double topicToolbar = 58;
 double searchControlBarWidth = 832;
 
+double resultBar = 43;
+String googleSearchFont = 'Arial';
+
 Map imageNames = {
   "unselected_All": "unselected_mag_icon.svg?alt=media",
   "All": "coloredMagGlass.svg?alt=media",
