@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-
+import 'search_controls_bar.dart';
+import 'global_vars.dart';
 void main() {
   runApp(MyApp());
 }
@@ -10,23 +11,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-        // This makes the visual density adapt to the platform that you run
-        // the app on. For desktop platforms, the controls will be smaller and
-        // closer together (more dense) than on mobile platforms.
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -178,7 +162,7 @@ class _MyHomePageState extends State<MyHomePage> {
     double searchBarHeight =
         50; // It is actually 46 pixels on google search apge
     double searchBarPadding = 20;
-    double topicToolabr = 58;
+    
     double resultBar = 43;
 
     Container searchBar = Container(
@@ -266,130 +250,8 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
 
-    double searchControlBarWidth = 832;
 
-    Widget searchControlBar = Container(
-      height: topicToolabr,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Container(
-              width: searchControlBarWidth, //1363
-              color: Hexcolor(
-                googleWhite,
-              ),
-              child: Row(
-                children: [
-                  Container(
-                    width: 169,
-                    color: Colors.black,
-                  ),
-                  Container(
-                    padding: EdgeInsets.fromLTRB(10, 16, 12, 16),
-                    child: Row(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.fromLTRB(0, 0, 5, 0),
-                          child: Image.network(
-                            firestoreURL + "coloredMagGlass.svg?alt=media",
-                            width: 20,
-                            height: 20,
-                          ),
-                        ),
-                        Text("All"),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.fromLTRB(10, 16, 12, 16),
-                    child: Row(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.fromLTRB(0, 0, 5, 0),
-                          child: Image.network(
-                            firestoreURL + "image_icon.svg?alt=media",
-                            width: 20,
-                            height: 20,
-                          ),
-                        ),
-                        Text("Images"),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.fromLTRB(10, 16, 12, 16),
-                    child: Row(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.fromLTRB(0, 0, 5, 0),
-                          child: Image.network(
-                            firestoreURL + "news_icon.svg?alt=media",
-                            width: 20,
-                            height: 20,
-                          ),
-                        ),
-                        Text("News"),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.fromLTRB(10, 16, 12, 16),
-                    child: Row(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.fromLTRB(0, 0, 5, 0),
-                          child: Image.network(
-                            firestoreURL + "pricetag.svg?alt=media",
-                            width: 20,
-                            height: 20,
-                          ),
-                        ),
-                        Text("Shopping"),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.fromLTRB(10, 16, 12, 16),
-                    child: Row(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.fromLTRB(0, 0, 5, 0),
-                          child: Image.network(
-                            firestoreURL + "play_button.svg?alt=media",
-                            width: 20,
-                            height: 20,
-                          ),
-                        ),
-                        Text("Videos"),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.fromLTRB(10, 16, 12, 16),
-                    child: Row(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.fromLTRB(0, 0, 5, 0),
-                          child: Image.network(
-                            firestoreURL + "3dots.svg?alt=media",
-                            width: 20,
-                            height: 20,
-                          ),
-                        ),
-                        Text("More"),
-                      ],
-                    ),
-                  ),
-                ],
-              )),
-          Expanded(
-            child: Container(
-              color: Colors.yellow,
-            ),
-          ),
-        ],
-      ),
-    );
+    Widget searchControlBar = SearchControlBar();
 
     return Scaffold(
       body: Column(
@@ -411,7 +273,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           Container(
             height: height -
-                topicToolabr -
+                topicToolbar -
                 2 * searchBarPadding -
                 searchBarHeight -
                 resultBar,
@@ -446,3 +308,5 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+
