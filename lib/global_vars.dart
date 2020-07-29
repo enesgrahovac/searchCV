@@ -3,9 +3,12 @@ String firestoreURL =
     "https://firebasestorage.googleapis.com/v0/b/searchme-1.appspot.com/o/";
 double topicToolbar = 58;
 double searchControlBarWidth = 832;
-
+double contentWidthFactor = .655;
+double contentWidth = 892;
+String googleSearchBorderColor = "#dfe1e5";
 double resultBar = 43;
 String googleSearchFont = 'Arial';
+double profileBoxWidth = 400;
 
 Map imageNames = {
   "unselected_All": "unselected_mag_icon.svg?alt=media",

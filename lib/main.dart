@@ -3,6 +3,8 @@ import 'package:hexcolor/hexcolor.dart';
 import 'search_controls_bar.dart';
 import 'global_vars.dart';
 import 'search_results_bar.dart';
+import 'profile_box.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -49,18 +51,13 @@ class _MyHomePageState extends State<MyHomePage> {
     googleRed
   ];
   static String googleMagifyingGlassColor = "#9aa0a6";
-  static String googleSearchBorderColor = "#dfe1e5";
+  
   static String googleCancelColor = '#80868b';
 
   static String googleWhite = "#fff"; // AKA white
 
-  static String googleSearchFont = 'Arial';
-
   bool emptySearchBox = true;
   // bool searchFocused = false; // Used for a focused search bar
-
-  static String firestoreURL =
-      "https://firebasestorage.googleapis.com/v0/b/searchme-1.appspot.com/o/";
 
   static Widget magIcon = Image.network(
     // firestoreURL + "mag_icon.png?alt=media",
@@ -158,13 +155,11 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    double contentWidth = width * .655;
+    // double contentWidth = width * contentWidthFactor;
     double searchbarWidth = 690.0 - 98; // width of search bar minus icons
     double searchBarHeight =
         50; // It is actually 46 pixels on google search apge
     double searchBarPadding = 20;
-    
-    
 
     Container searchBar = Container(
       height: searchBarHeight +
@@ -251,10 +246,22 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
 
-
     Widget searchControlBar = SearchControlBar();
 
     Widget searchResultsBar = SearchResultsBar();
+
+    Widget profileBox = ProfileBox();
+
+    Widget contentBuild = Column(
+      children: [
+        Expanded(
+          child: Container(
+            width: contentWidth,
+            color: Colors.red,
+          ),
+        ),
+      ],
+    );
 
     return Scaffold(
       body: Column(
@@ -271,26 +278,8 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Column(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        width: contentWidth,
-                        color: Colors.red,
-                      ),
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        width: width - contentWidth,
-                        color: Colors.blue,
-                      ),
-                    ),
-                  ],
-                ),
+                contentBuild,
+                profileBox,
               ],
             ),
           ),
@@ -299,6 +288,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-
-

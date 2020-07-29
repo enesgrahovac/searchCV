@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'global_vars.dart' as globals;
+import 'global_vars.dart';
 import 'dart:html' as html;
 
 class SearchControlBar extends StatefulWidget {
@@ -13,17 +13,10 @@ class SearchControlBar extends StatefulWidget {
 }
 
 class _SearchControlBarState extends State<SearchControlBar> {
-  double topicToolabr = globals.topicToolbar;
-
-  double searchControlBarWidth = globals.searchControlBarWidth;
-
-  String googleWhite = globals.googleWhite;
-
-  String firestoreURL = globals.firestoreURL;
 
   List icons = ["All", "Images", "News", "Books", "Videos", "More"];
 
-  Map imagePaths = globals.imageNames;
+  Map imagePaths = imageNames;
 
   Map<String, Image> cacheImages = {};
 
@@ -112,37 +105,6 @@ class _SearchControlBarState extends State<SearchControlBar> {
     ];
   }
 
-  // Initializer
-  // @override
-  // void initState() {
-
-  //   for (var i = 0; i < icons.length; i++) {
-  //     String iconName = icons[i];
-  //     Image image = Image.network(
-  //       firestoreURL + imagePaths[iconName],
-  //       width: 24,
-  //       height: 24,
-  //     );
-  //     Image unselectedImage = Image.network(
-  //       firestoreURL + imagePaths["unselected_" + iconName],
-  //       width: 24,
-  //       height: 24,
-  //     );
-  //     // cacheImages.update(iconName, (value) => image);
-  //     cacheImages[iconName] = image;
-  //     cacheImages["unselected_" + iconName] = unselectedImage;
-  //     print("All good");
-  //     precacheImage(image.image,context);
-  //     precacheImage(unselectedImage.image,context);
-  //     print("works");
-
-  //   }
-  //   allIcons = _buildBar("All");
-
-  //   // searchFocused = false; // Used for a focused search bar
-  //   super.initState();
-  // }
-
   /// Did Change Dependencies
   @override
   void didChangeDependencies() {
@@ -174,7 +136,7 @@ class _SearchControlBarState extends State<SearchControlBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: topicToolabr,
+      height: topicToolbar,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: allIcons,
