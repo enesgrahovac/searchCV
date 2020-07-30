@@ -8,7 +8,7 @@ double contentWidth = 892;
 String googleSearchBorderColor = "#dfe1e5";
 double resultBar = 43;
 String googleSearchFont = 'Arial';
-double profileBoxWidth = 400;
+double profileBoxWidth = 368;
 
 Map imageNames = {
   "unselected_All": "unselected_mag_icon.svg?alt=media",

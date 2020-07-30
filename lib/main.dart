@@ -51,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
     googleRed
   ];
   static String googleMagifyingGlassColor = "#9aa0a6";
-  
+
   static String googleCancelColor = '#80868b';
 
   static String googleWhite = "#fff"; // AKA white
@@ -257,7 +257,7 @@ class _MyHomePageState extends State<MyHomePage> {
         Expanded(
           child: Container(
             width: contentWidth,
-            color: Colors.red,
+            // color: Colors.red,
           ),
         ),
       ],
@@ -269,19 +269,24 @@ class _MyHomePageState extends State<MyHomePage> {
           searchBar,
           searchControlBar,
           searchResultsBar,
-          Container(
-            height: height -
-                topicToolbar -
-                2 * searchBarPadding -
-                searchBarHeight -
-                resultBar,
-            child: Row(
+          // SingleChildScrollView(
+            // scrollDirection: Axis.vertical,
+            // child: 
+            Row(
               mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                contentBuild,
+                Container(
+                  height: height -
+                      topicToolbar -
+                      2 * searchBarPadding -
+                      searchBarHeight -
+                      resultBar,
+                  child: contentBuild,
+                ),
                 profileBox,
               ],
-            ),
+            // ),
           ),
         ],
       ),
