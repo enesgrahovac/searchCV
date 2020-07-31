@@ -15,11 +15,10 @@ class SearchResultsBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Container(
-            width: 180,
-          ),
           Expanded(
             child: Container(
+
+              padding: EdgeInsets.fromLTRB(180, 0, 0, 0),
               child: Text(
                 "About 1,550,000,000 results (0.51 seconds)",
                 style: TextStyle(

@@ -5,7 +5,7 @@ import 'global_vars.dart';
 import 'search_results_bar.dart';
 import 'profile_box.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'short_post_content.dart';
 void main() {
   runApp(MyApp());
 }
@@ -282,16 +282,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     Widget profileBox = ProfileBox();
 
-    Widget contentBuild = Column(
-      children: [
-        Expanded(
-          child: Container(
-            width: contentWidth,
-            // color: Colors.red,
-          ),
-        ),
-      ],
-    );
+    Widget contentBuild = ShortPostContent();
 
     return Scaffold(
       body: Column(
