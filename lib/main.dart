@@ -4,6 +4,7 @@ import 'search_controls_bar.dart';
 import 'global_vars.dart';
 import 'search_results_bar.dart';
 import 'profile_box.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() {
   runApp(MyApp());
@@ -38,6 +39,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final firestoreInstance = Firestore.instance;
   static String googleRed = "#EA4335";
   static String googleGreen = "#34A853";
   static String googleBlue = "#4285F4";
@@ -111,7 +113,6 @@ class _MyHomePageState extends State<MyHomePage> {
   static RichText googleName;
 
   void createGoogleLetters(name, {automated: false}) {
-    print(name);
     if (name == "") {
       emptySearchBox = true;
       searchInputController.clear();
@@ -128,6 +129,22 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  getUserData(CollectionReference user) async {
+    var res = user.document('egrahovac');
+
+    res.get().then(
+          (data) => {print(data['name'])},
+        );
+  }
+
+  getPosts() {
+    firestoreInstance.collection('posts').getDocuments().then((querySnapshot) {
+      querySnapshot.documents.forEach((result) {
+        print(result.data);
+      });
+    });
+  }
+
   // Initializer
   @override
   void initState() {
@@ -141,6 +158,19 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
     emptySearchBox = true;
+    var userData = firestoreInstance.collection('users');
+    // firestoreInstance.collection('users').document("egrahovac").get();
+    // firestoreInstance.collection('users').getDocuments().then((querySnapshot) {
+    //   querySnapshot.documents.forEach((result) {
+    //     print(result.data);
+    //   });
+    // });
+    getUserData(userData);
+    getPosts();
+    // .then((data) => {
+    //   printData(data)});
+    // print(userData);
+
     // searchFocused = false; // Used for a focused search bar
     super.initState();
   }
@@ -270,22 +300,22 @@ class _MyHomePageState extends State<MyHomePage> {
           searchControlBar,
           searchResultsBar,
           // SingleChildScrollView(
-            // scrollDirection: Axis.vertical,
-            // child: 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  height: height -
-                      topicToolbar -
-                      2 * searchBarPadding -
-                      searchBarHeight -
-                      resultBar,
-                  child: contentBuild,
-                ),
-                profileBox,
-              ],
+          // scrollDirection: Axis.vertical,
+          // child:
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: height -
+                    topicToolbar -
+                    2 * searchBarPadding -
+                    searchBarHeight -
+                    resultBar,
+                child: contentBuild,
+              ),
+              profileBox,
+            ],
             // ),
           ),
         ],
