@@ -21,7 +21,10 @@ class _ShortPostContentState extends State<ShortPostContent> {
     print(data);
     return Row(
       children: [
-        Expanded(
+        Container(
+          width: 600,
+          height: 97,
+          padding: EdgeInsets.fromLTRB(0, 0, 0, 28),
           child: Column(
             children: [
               Text(data['description']),
@@ -45,32 +48,39 @@ class _ShortPostContentState extends State<ShortPostContent> {
     );
   }
 
-  Widget contentList = Container(
-              child: ListView(
-                physics: const AlwaysScrollableScrollPhysics(),
-                children: [
-                  StreamBuilder<QuerySnapshot>(
-                    stream: firestoreInstance.collection("posts").snapshots(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        return Column(
-                            children: snapshot.data.documents
-                                .map<Widget>((doc) => _buildCard(doc))
-                                .toList());
-                      } else {
-                        return SizedBox();
-                      }
-                    },
-                  ),
-                  // Container(
-                  //   child:
-                  // new Stack(
-                  //   children: [
-                  // Positioned(
-                  // child:
-                ],
-              ),
-            );
+  Widget contentList;
+
+  // Initializer
+  @override
+  void initState() {
+    contentList = Container(
+      child: ListView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        children: [
+          StreamBuilder<QuerySnapshot>(
+            stream: firestoreInstance.collection("posts").snapshots(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Column(
+                    children: snapshot.data.documents
+                        .map<Widget>((doc) => _buildCard(doc))
+                        .toList());
+              } else {
+                return SizedBox();
+              }
+            },
+          ),
+          // Container(
+          //   child:
+          // new Stack(
+          //   children: [
+          // Positioned(
+          // child:
+        ],
+      ),
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +90,7 @@ class _ShortPostContentState extends State<ShortPostContent> {
         //   child:
         Container(
           width: contentWidth,
-          color: Colors.red,
+          // color: Colors.red,
           // child: Container(
           // width: 652,
           height: 500,
