@@ -75,7 +75,7 @@ class _ShortPostContentState extends State<ShortPostContent> {
           // new Stack(
           //   children: [
           // Positioned(
-          // child:
+          // child
         ],
       ),
     );
