@@ -17,34 +17,44 @@ class _ShortPostContentState extends State<ShortPostContent> {
 
   Widget _buildCard(doc) {
     var data = doc.data;
-    print("DATA IN CONTENT PAGE");
-    print(data);
-    return Row(
-      children: [
-        Container(
-          width: 600,
-          height: 97,
-          padding: EdgeInsets.fromLTRB(0, 0, 0, 28),
-          child: Column(
-            children: [
-              Text(data['description']),
-              // Text(timeString),
-            ],
+    return Container(
+      width: 600,
+      height: 97,
+      padding: EdgeInsets.fromLTRB(0, 0, 0, 28),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          RichText(
+            text: TextSpan(
+              style: TextStyle(
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.w400
+              ),
+              children: [
+                TextSpan(
+                  text: '1 day ago - ',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Color.fromRGBO(112, 117, 122, 1),
+                    fontFamily: "Roboto",
+                  ),
+                ),
+                TextSpan(
+                  text: data['description'],
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Color.fromRGBO(77, 81, 86, 1),
+                    fontFamily: "Roboto",
+                  ),
+                )
+              ],
+            ),
           ),
-        ),
-        // Expanded(
-        //   child: Column(
-        //     children: [
-        //       AutoSizeText(
-        //         data["company_name"],
-        //         style: TextStyle(fontSize: 12.0),
-        //         maxLines: 1,
-        //       ),
-        //       // Text(data["company_name"]),
-        //     ],
-        //   ),
-        // ),
-      ],
+
+          Text(data['tags'][0])
+          // Text(timeString),
+        ],
+      ),
     );
   }
 
@@ -62,6 +72,8 @@ class _ShortPostContentState extends State<ShortPostContent> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Column(
+                    // mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: snapshot.data.documents
                         .map<Widget>((doc) => _buildCard(doc))
                         .toList());
