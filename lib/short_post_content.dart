@@ -17,22 +17,34 @@ class _ShortPostContentState extends State<ShortPostContent> {
 
   Widget _buildCard(doc) {
     var data = doc.data;
+    DateTime today = DateTime.now();
+    // Timestamp today = Timestamp.now();
+    DateTime timePosted = data['date'].toDate();
+    Duration timeDifference = timePosted.difference(today);
+    String timeDifferenceDisplay;
+    print(timeDifference.inDays);
+    if (timeDifference.inDays < -1) {
+      timeDifferenceDisplay = "${-1 * timeDifference.inDays} days ago - ";
+    } else if (timeDifference.inDays == -1) {
+      timeDifferenceDisplay = "1 day ago - ";
+    } else {
+      timeDifferenceDisplay = "today - ";
+    }
     return Container(
       width: 600,
-      height: 97,
+      // height: 97, // Should be 97 as on the google site
+      height: 150,
       padding: EdgeInsets.fromLTRB(0, 0, 0, 28),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           RichText(
             text: TextSpan(
-              style: TextStyle(
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.w400
-              ),
+              style:
+                  TextStyle(fontFamily: 'Roboto', fontWeight: FontWeight.w400),
               children: [
                 TextSpan(
-                  text: '1 day ago - ',
+                  text: timeDifferenceDisplay,
                   style: TextStyle(
                     fontSize: 14,
                     color: Color.fromRGBO(112, 117, 122, 1),
@@ -46,7 +58,7 @@ class _ShortPostContentState extends State<ShortPostContent> {
                     color: Color.fromRGBO(77, 81, 86, 1),
                     fontFamily: "Roboto",
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -68,7 +80,7 @@ class _ShortPostContentState extends State<ShortPostContent> {
         physics: const AlwaysScrollableScrollPhysics(),
         children: [
           StreamBuilder<QuerySnapshot>(
-            stream: firestoreInstance.collection("posts").snapshots(),
+            stream: firestoreInstance.collection("posts").orderBy("date", descending: true).snapshots(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Column(
@@ -82,12 +94,6 @@ class _ShortPostContentState extends State<ShortPostContent> {
               }
             },
           ),
-          // Container(
-          //   child:
-          // new Stack(
-          //   children: [
-          // Positioned(
-          // child
         ],
       ),
     );
