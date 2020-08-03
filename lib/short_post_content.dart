@@ -33,33 +33,49 @@ class _ShortPostContentState extends State<ShortPostContent> {
     return Container(
       width: 600,
       // height: 97, // Should be 97 as on the google site
-      height: 150,
+      // height: 1200,
       padding: EdgeInsets.fromLTRB(0, 0, 0, 28),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          RichText(
-            text: TextSpan(
-              style:
-                  TextStyle(fontFamily: 'Roboto', fontWeight: FontWeight.w400),
-              children: [
-                TextSpan(
-                  text: timeDifferenceDisplay,
+          Text("Enes Grahovac - Medium",
+              // data['project'],
+              style: TextStyle(
+                  fontFamily: 'Roboto',
+                  color: Color.fromRGBO(23, 13, 171, 1),
+                  fontSize: 20)),
+          Container(
+              padding: EdgeInsets.fromLTRB(0, 4, 0, 0),
+              child: Text(data['projectPath'],
                   style: TextStyle(
-                    fontSize: 14,
-                    color: Color.fromRGBO(112, 117, 122, 1),
-                    fontFamily: "Roboto",
+                      fontFamily: 'Roboto',
+                      color: Color.fromRGBO(0, 102, 33, 1),
+                      fontSize: 16))),
+          Container(
+            padding: EdgeInsets.fromLTRB(0, 4, 0, 0),
+            child: RichText(
+              text: TextSpan(
+                style: TextStyle(
+                    fontFamily: 'Roboto', fontWeight: FontWeight.w400),
+                children: [
+                  TextSpan(
+                    text: timeDifferenceDisplay,
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Color.fromRGBO(112, 117, 122, 1),
+                      fontFamily: "Roboto",
+                    ),
                   ),
-                ),
-                TextSpan(
-                  text: data['description'],
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Color.fromRGBO(77, 81, 86, 1),
-                    fontFamily: "Roboto",
+                  TextSpan(
+                    text: data['description'],
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Color.fromRGBO(77, 81, 86, 1),
+                      fontFamily: "Roboto",
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
 
@@ -75,33 +91,35 @@ class _ShortPostContentState extends State<ShortPostContent> {
   // Initializer
   @override
   void initState() {
-    contentList = Container(
-      child: ListView(
-        physics: const AlwaysScrollableScrollPhysics(),
-        children: [
-          StreamBuilder<QuerySnapshot>(
-            stream: firestoreInstance.collection("posts").orderBy("date", descending: true).snapshots(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return Column(
-                    // mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: snapshot.data.documents
-                        .map<Widget>((doc) => _buildCard(doc))
-                        .toList());
-              } else {
-                return SizedBox();
-              }
-            },
-          ),
-        ],
-      ),
+    contentList = ListView(
+      physics: const AlwaysScrollableScrollPhysics(),
+      children: [
+        StreamBuilder<QuerySnapshot>(
+          stream: firestoreInstance
+              .collection("posts")
+              .orderBy("date", descending: true)
+              .snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return Column(
+                  // mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: snapshot.data.documents
+                      .map<Widget>((doc) => _buildCard(doc))
+                      .toList());
+            } else {
+              return SizedBox();
+            }
+          },
+        ),
+      ],
     );
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     return Column(
       children: [
         // Expanded(
@@ -111,11 +129,15 @@ class _ShortPostContentState extends State<ShortPostContent> {
           // color: Colors.red,
           // child: Container(
           // width: 652,
-          height: 500,
+          height: height -
+              resultBar -
+              topicToolbar -
+              searchBarHeight -
+              2 * searchBarPadding,
           child: Container(
             // color: Colors.grey,
             padding: EdgeInsets.fromLTRB(180, 0, 0, 0),
-            height: 500,
+            // height: 100,
             child: contentList,
           ),
         ),

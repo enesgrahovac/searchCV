@@ -9,6 +9,9 @@ String googleSearchBorderColor = "#dfe1e5";
 double resultBar = 43;
 String googleSearchFont = 'Arial';
 double profileBoxWidth = 368;
+double searchBarHeight = 50; // It is actually 46 pixels on google search apge
+
+double searchBarPadding = 20;
 
 Map imageNames = {
   "unselected_All": "unselected_mag_icon.svg?alt=media",

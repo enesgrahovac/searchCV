@@ -187,9 +187,7 @@ class _MyHomePageState extends State<MyHomePage> {
     double height = MediaQuery.of(context).size.height;
     // double contentWidth = width * contentWidthFactor;
     double searchbarWidth = 690.0 - 98; // width of search bar minus icons
-    double searchBarHeight =
-        50; // It is actually 46 pixels on google search apge
-    double searchBarPadding = 20;
+
 
     Container searchBar = Container(
       height: searchBarHeight +
