@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: MyHomePage(title: 'Flutter Demo Home Page'),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -140,7 +141,7 @@ class _MyHomePageState extends State<MyHomePage> {
   getPosts() {
     firestoreInstance.collection('posts').getDocuments().then((querySnapshot) {
       querySnapshot.documents.forEach((result) {
-        print(result.data);
+        // print(result.data);
       });
     });
   }
@@ -158,14 +159,14 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
     emptySearchBox = true;
-    var userData = firestoreInstance.collection('users');
+    // var userData = firestoreInstance.collection('users');
     // firestoreInstance.collection('users').document("egrahovac").get();
     // firestoreInstance.collection('users').getDocuments().then((querySnapshot) {
     //   querySnapshot.documents.forEach((result) {
     //     print(result.data);
     //   });
     // });
-    getUserData(userData);
+    // getUserData(userData);
     getPosts();
     // .then((data) => {
     //   printData(data)});

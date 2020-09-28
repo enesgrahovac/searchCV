@@ -19,16 +19,23 @@ class _ShortPostContentState extends State<ShortPostContent> {
     var data = doc.data;
     DateTime today = DateTime.now();
     // Timestamp today = Timestamp.now();
+
     DateTime timePosted = data['date'].toDate();
     Duration timeDifference = timePosted.difference(today);
     String timeDifferenceDisplay;
-    print(timeDifference.inDays);
     if (timeDifference.inDays < -1) {
       timeDifferenceDisplay = "${-1 * timeDifference.inDays} days ago - ";
     } else if (timeDifference.inDays == -1) {
       timeDifferenceDisplay = "1 day ago - ";
     } else {
       timeDifferenceDisplay = "today - ";
+    }
+    var tags = data['tags'];
+    List<Widget> tagList = [];
+    if (tags != null) {
+      print(tags);
+      tags.forEach((element) => {tagList.add(Text(element))});
+      print(tagList);
     }
     return Container(
       width: 600,
@@ -38,19 +45,25 @@ class _ShortPostContentState extends State<ShortPostContent> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Enes Grahovac - Medium",
-              // data['project'],
-              style: TextStyle(
-                  fontFamily: 'Roboto',
-                  color: Color.fromRGBO(23, 13, 171, 1),
-                  fontSize: 20)),
-          Container(
-              padding: EdgeInsets.fromLTRB(0, 4, 0, 0),
-              child: Text(data['projectPath'],
+          (data["title"] != null)
+              ? Text(data["title"],
+                  // data['project'],
                   style: TextStyle(
                       fontFamily: 'Roboto',
-                      color: Color.fromRGBO(0, 102, 33, 1),
-                      fontSize: 16))),
+                      color: Color.fromRGBO(23, 13, 171, 1),
+                      fontSize: 20))
+              : Container(),
+
+          // For project path
+          (data["projectPath"] != null)
+              ? Container(
+                  padding: EdgeInsets.fromLTRB(0, 4, 0, 0),
+                  child: Text(data['projectPath'],
+                      style: TextStyle(
+                          fontFamily: 'Roboto',
+                          color: Color.fromRGBO(0, 102, 33, 1),
+                          fontSize: 16)))
+              : Container(),
           Container(
             padding: EdgeInsets.fromLTRB(0, 4, 0, 0),
             child: RichText(
@@ -78,8 +91,7 @@ class _ShortPostContentState extends State<ShortPostContent> {
               ),
             ),
           ),
-
-          Text(data['tags'][0])
+          (tags != null) ? Row(children: tagList) : Container(), // Where Tags are displayed
           // Text(timeString),
         ],
       ),
